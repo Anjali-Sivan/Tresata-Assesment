@@ -13,7 +13,6 @@ interface TaskItemProps {
 
 const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit, onDelete, animateIn = false }) => {
   const [visible, setVisible] = useState(!animateIn);
-  const [exiting, setExiting] = useState(false);
   const [hovered, setHovered] = useState(false);
 
   useEffect(() => {
@@ -23,7 +22,6 @@ const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit, onDelete, animateIn =
   }, [animateIn]);
 
   const handleDelete = useCallback(() => {
-    setExiting(true);
     setTimeout(() => onDelete(task.id), 320);
   }, [onDelete, task.id]);
 
@@ -43,8 +41,8 @@ const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit, onDelete, animateIn =
           : visible
           ? 'translateX(0) scaleY(1)'
           : 'translateX(-20px) scaleY(0.95)',
-        maxHeight: exiting ? 0 : 200,
-        marginBottom: exiting ? 0 : 1,
+        maxHeight: 200,
+        marginBottom: 1,
         background: hovered ? '#f0f4ff' : '#fff',
       }}
     >
