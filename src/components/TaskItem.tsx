@@ -35,7 +35,7 @@ const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit, onDelete, animateIn =
       onMouseLeave={() => setHovered(false)}
       style={{
         ...styles.card,
-        opacity: visible && !exiting ? 1 : 0,
+        opacity: visible ? 1 : 0,
         transform: exiting
           ? 'translateX(40px) scaleY(0.8)'
           : visible
