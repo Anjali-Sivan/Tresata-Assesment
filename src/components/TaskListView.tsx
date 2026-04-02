@@ -9,6 +9,7 @@ interface TaskListViewProps {
   onEdit: (task: Task) => void;
   onDelete: (id: string) => void;
   newTaskId: string | null;
+    deletingId: string | null;
 }
 
 const STATUSES: TaskStatus[] = ['In Progress', 'Pending', 'Completed'];
@@ -21,6 +22,7 @@ const TaskListView: React.FC<TaskListViewProps> = ({
   onEdit,
   onDelete,
   newTaskId,
+  deletingId
 }) => {
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState<FilterType>('All');
@@ -100,6 +102,7 @@ const TaskListView: React.FC<TaskListViewProps> = ({
             newTaskId={newTaskId}
             onEdit={onEdit}
             onDelete={onDelete}
+            deletingId={deletingId}
           />
         ))}
 
