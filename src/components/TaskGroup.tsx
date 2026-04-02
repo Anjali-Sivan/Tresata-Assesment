@@ -10,6 +10,7 @@ interface TaskGroupProps {
   newTaskId?: string | null;
   onEdit: (task: Task) => void;
   onDelete: (id: string) => void;
+  deletingId: string | null;
 }
 
 const FONT = "'Jost', sans-serif";
@@ -21,6 +22,7 @@ const TaskGroup: React.FC<TaskGroupProps> = ({
   newTaskId,
   onEdit,
   onDelete,
+deletingId
 }) => {
   const [open, setOpen] = useState(defaultOpen);
 
@@ -69,13 +71,14 @@ const TaskGroup: React.FC<TaskGroupProps> = ({
           <div style={styles.empty}>No tasks here.</div>
         ) : (
           tasks.map(task => (
-            <TaskItem
-              key={task.id}
-              task={task}
-              onEdit={onEdit}
-              onDelete={onDelete}
-              animateIn={task.id === newTaskId}
-            />
+          <TaskItem
+  key={task.id}
+  task={task}
+  onEdit={onEdit}
+  onDelete={onDelete}
+  animateIn={task.id === newTaskId}
+  isDeleting={task.id === deletingId} // ← pass this
+/>
           ))
         )}
       </div>
