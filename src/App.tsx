@@ -74,6 +74,7 @@ const App: React.FC = () => {
           onEdit={handleEditClick}
           onDelete={handleDeleteClick}
           newTaskId={newTaskId}
+          deletingId={deletingId}
         />
       )}
 
