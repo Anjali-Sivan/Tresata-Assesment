@@ -9,6 +9,7 @@ interface TaskItemProps {
   onEdit: (task: Task) => void;
   onDelete: (id: string) => void;
   animateIn?: boolean;
+ isDeleting?: boolean; 
 }
 
 const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit, onDelete, animateIn = false }) => {
@@ -16,15 +17,13 @@ const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit, onDelete, animateIn =
   const [hovered, setHovered] = useState(false);
 
   useEffect(() => {
-    if (animateIn) {
-      requestAnimationFrame(() => setVisible(true));
-    }
+    if (animateIn) requestAnimationFrame(() => setVisible(true));
   }, [animateIn]);
 
-  const handleDelete = useCallback(() => {
-    setTimeout(() => onDelete(task.id), 320);
-  }, [onDelete, task.id]);
 
+ const handleDelete = () => {
+    onDelete(task.id);
+  };
   const handleEdit = useCallback(() => onEdit(task), [onEdit, task]);
 
   const isCompleted = task.status === 'Completed';
@@ -36,12 +35,10 @@ const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit, onDelete, animateIn =
       style={{
         ...styles.card,
         opacity: visible ? 1 : 0,
-        transform: exiting
-          ? 'translateX(40px) scaleY(0.8)'
-          : visible
+        transform:visible
           ? 'translateX(0) scaleY(1)'
           : 'translateX(-20px) scaleY(0.95)',
-        maxHeight: 200,
+        maxHeight:200,
         marginBottom: 1,
         background: hovered ? '#f0f4ff' : '#fff',
       }}
